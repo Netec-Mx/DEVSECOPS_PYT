@@ -1,12 +1,16 @@
-# 1. Modelado de amenazas con Microsoft Threat Modeling Tool
+# Práctica 1. Modelado de amenazas con Microsoft Threat Modeling Tool
 
-En este laboratorio el alumno debe de implementar un Modelo de amenazas de una aplicación orientada a Microservicios. Observar las posibles amenazas y cómo mitigarlas. 
+### Descripción:
+
+En este laboratorio, deberás implementar un *modelo de amenazas para una aplicación orientada a microservicios*. Durante el proceso, observarás las posibles amenazas y esplorarás estrategias para mitigarlas de manera efectiva. 
 
 
-## Objetivos
-- Comprender la solicitud de la aplicación
-- Usar Microsoft Modeling Tool para detectar posible amenazas de la arquitectura. 
-- Generar un informe de las posibles amenazas encontradas. 
+## Objetivos: 
+
+Al finalizar la práctica, serás capaz de:
+- Comprender la solicitud de la aplicación.
+- Utilizar **Microsoft Modeling Tool** para identificar posible amenazas en la arquitectura. 
+- Elaborar un informe sobre las posibles amenazas detectadas. 
 
 ---
 <!--Este fragmento es la barra de 
@@ -17,14 +21,14 @@ navegación-->
             <tr>
                 <td style="text-align: center;">
                     <a href=""><img src="../images/anterior.png" width="40px"></a>
-                    <br>anterior
+                    <br>Anterior
                 </td>
                 <td style="text-align: center;">
                    <a href="../README.md">Lista Laboratorios</a>
                 </td>
 <td style="text-align: center;">
                     <a href="../Capitulo2/"><img src="../images/siguiente.png" width="40px"></a>
-                    <br>siguiente
+                    <br>Siguiente
                 </td>
             </tr>
         </table>
@@ -32,35 +36,33 @@ navegación-->
 
 ---
 
-## Diagrama 
+## Objetivo visual: 
 
-Se espera que el alumno analice la siguiente estructura de aplicación. 
+Se espera analices la estructura de la aplicación presentada a continuación. 
 
 ![diagrama](../images/1/diagrama.png)
 
+## Instrucciones:
 
+Antes de comenzar, lee la siguiente información detalladamente sobre la aplicación propuesta en el diagrama anterior. 
 
-## Instrucciones 
-Antes de comenzar leer la siguiente información de la aplicación propuesta en el diagrama anterior. 
+> **IMPORTANTE:** Este diagrama ilustra la interacción entre los componentes de una arquitectura de microservicios, con especial énfasis en el flujo de autenticación. Los componentes clave incluyen un **Servidor de Descubrimiento**, un **Cliente de Microservicio**, una base de datos **MySQL**, un **Gateway** y un **Proveedor de Identidad**. El flujo inicia cuando un cliente solicita un token al Proveedor de Identidad, que responde con el token, permitiendo al cliente interactuar con los microservicios a través del Gateway.
 
-> **IMPORTANTE:** Este diagrama ilustra la interacción entre varios componentes en una arquitectura de microservicios, con énfasis en el flujo de autenticación. Los componentes clave incluyen un Servidor de Descubrimiento, Cliente de Microservicio, base de datos MySQL, Gateway y un Proveedor de Identidad. El flujo comienza con un cliente solicitando un token al Proveedor de Identidad, que responde con el token, lo que permite al cliente interactuar con los microservicios a través del gateway.
+Una vez comprendida la funcionalidad de la aplicación solicitada, de debe proceder con el modelado para identificar las posibles amenazas en el diagrama anterior. 
 
-
-Una vez comprendida la funcionalidad de la aplicación que se solicita, ahora debemos de comenzar el modelado para la detección de posibles amenazas en el diagrama anterior. 
-
-1. Abrir **Microsoft Threat Modeling Tool**
+1. Para iniciar, abre **Microsoft Threat Modeling Tool**.
 
 ![alt text](../images/1/1.png)
 
-2. Seleccionaremos **Create A Model**
+2. Selecciona **Create A Model**.
 
 ![alt text](../images/1/2.png)
 
-3. Nos abrirá un workspace  con todas las herramientas necesarias para crear un modelo. 
+3. Con esto, se abrirá un workspace con todas las herramientas necesarias para crear un modelo. 
 
 ![alt text](../images/1/3.png)
 
-4. Definir el siguiente diagrama con los siguientes elementos. 
+4. Define el siguiente diagrama con los elementos que se muestran a continuación. 
 
 ![alt text](../images/1/4.png)
 
@@ -74,52 +76,48 @@ Una vez comprendida la funcionalidad de la aplicación que se solicita, ahora de
 - **Request**
 - **Response**
 
-6. Guardar el modelo con el nombre **microservices-model** 
+6. Posteriormente, guarda el modelo con el nombre **microservices-model**.
 
-7. Generar el reporte **Reports-> Create Full Report** 
+7. Luego, genera el reporte; para ello, da clic en: **Reports ➡️ Create Full Report**.
 
 ![alt text](../images/1/5.png)
 
-8. Almacenar el reporte en el escritorio con el nombre **reporte**
+8. Guarda el reporte en el escritorio con el nombre **reporte**.
 
-9. Analizar el reporte generado
+9. Después, analiza el reporte generado.
 
 ![alt text](../images/1/6.png)
 
+10. Realiza una lista que identifique en qué casos del ciclo de vida del software se implementa cada vulnerabilidad. 
 
-10. Listar en que casos del ciclo de vida del software se implementa cada vulnerabilidad. 
-
-- **Requirements (Requisitos)**
+- **Requirements (Requisitos):**
 
     - Se identifican los requisitos de seguridad.
     - Se determina el nivel de riesgo aceptable.
 
-- **Design (Diseño)**
+- **Design (Diseño):**
 
     - Aquí se realiza el modelado de amenazas.
     - Se identifican amenazas, mitigaciones y se documentan.
 
-- **Implementation (Implementación)**
+- **Implementation (Implementación):**
 
     - Se codifican las mitigaciones.
-    - Se aplican prácticas seguras de desarrollo (como validación de entradas, cifrado, etc).
+    - Se aplican prácticas seguras de desarrollo (como: validación de entradas, cifrado, entro otras).
 
-- **Verification (Verificación / Pruebas)**
+- **Verification (Verificación / Pruebas):**
 
     - Pruebas de seguridad: análisis estático, dinámico, pruebas de penetración, etc.
 
-- **Release (Liberación)**
+- **Release (Liberación):**
 
     - Revisión final de seguridad.
-
     - Se valida que todos los riesgos fueron tratados adecuadamente.
 
-- **Response (Respuesta / Mantenimiento)**
+- **Response (Respuesta / Mantenimiento):**
 
     - Planes de respuesta a incidentes y correcciones post-lanzamiento.
 
-
-
-## Resultado esperado
+## Resultado esperado:
 
 ![alt text](../images/1/7.png)
