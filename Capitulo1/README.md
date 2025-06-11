@@ -2,14 +2,12 @@
 
 ### Descripción:
 
-En este laboratorio, deberás implementar un *modelo de amenazas para una aplicación orientada a microservicios*. Durante el proceso, observarás las posibles amenazas y esplorarás estrategias para mitigarlas de manera efectiva. 
-
+En este laboratorio, deberás implementar un *modelo de amenazas para una aplicación orientada a microservicios*. Durante el proceso, observarás las posibles amenazas y explorarás estrategias para mitigarlas de manera efectiva. 
 
 ## Objetivos: 
-
 Al finalizar la práctica, serás capaz de:
 - Comprender la solicitud de la aplicación.
-- Utilizar **Microsoft Modeling Tool** para identificar posible amenazas en la arquitectura. 
+- Utilizar **Microsoft Modeling Tool** para identificar posibles amenazas en la arquitectura. 
 - Elaborar un informe sobre las posibles amenazas detectadas. 
 
 ---
@@ -38,7 +36,7 @@ navegación-->
 
 ## Objetivo visual: 
 
-Se espera analices la estructura de la aplicación presentada a continuación. 
+En esta práctica, se espera que analices la estructura de la aplicación presentada a continuación: 
 
 ![diagrama](../images/1/diagrama.png)
 
@@ -48,7 +46,7 @@ Antes de comenzar, lee la siguiente información detalladamente sobre la aplicac
 
 > **IMPORTANTE:** Este diagrama ilustra la interacción entre los componentes de una arquitectura de microservicios, con especial énfasis en el flujo de autenticación. Los componentes clave incluyen un **Servidor de Descubrimiento**, un **Cliente de Microservicio**, una base de datos **MySQL**, un **Gateway** y un **Proveedor de Identidad**. El flujo inicia cuando un cliente solicita un token al Proveedor de Identidad, que responde con el token, permitiendo al cliente interactuar con los microservicios a través del Gateway.
 
-Una vez comprendida la funcionalidad de la aplicación solicitada, de debe proceder con el modelado para identificar las posibles amenazas en el diagrama anterior. 
+Una vez comprendida la funcionalidad de la aplicación solicitada, se debe proceder con el modelado para identificar las posibles amenazas en el diagrama anterior. 
 
 1. Para iniciar, abre **Microsoft Threat Modeling Tool**.
 
