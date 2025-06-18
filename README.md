@@ -1,20 +1,9 @@
-<div>
-<table>
-  <tbody>
-      <tr>
-    <td> 
-        <img src="./images/neteclogo.png" width="250px">
-    <td>
-    <td>
-      <h1>DevSecOps<h1>
-    </td>
-  </tr>
-  </tbody>
-<table>
-</div>
+![neteclogo.png](./images/neteclogo.png)
+
+# Curso: Desarrollo Seguro y Operaciones con Python
 
 **Plataforma de Laboratorios**
-Bienvenido a la **Plataforma de Laboratorios** del curso **DevSecOps**. Aquí podrás explorar diferentes tecnologías a través de prácticas guiadas. ¡Desarrolla tus habilidades y lleva tus conocimientos al siguiente nivel!
+Bienvenido a la **Plataforma de Laboratorios** del curso **Desarrollo Seguro y Operaciones con Python**. Aquí podrás explorar diferentes tecnologías a través de prácticas guiadas. ¡Desarrolla tus habilidades y lleva tus conocimientos al siguiente nivel!
 
 # Lista de Laboratorios
 Cada uno de estos laboratorios está diseñado para ofrecerte una experiencia práctica. Haz clic en los enlaces para comenzar.
