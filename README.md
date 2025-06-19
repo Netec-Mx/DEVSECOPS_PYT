@@ -1,4 +1,4 @@
-![neteclogo.png](./images/neteclogo.png)
+<img src="images/neteclogo.png" alt="logo" width="300"/>
 
 # Curso: Desarrollo Seguro y Operaciones con Python
 
