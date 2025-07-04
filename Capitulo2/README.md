@@ -1,8 +1,8 @@
-# Práctica 2. Análisis de seguridad y códificación de un API Rest Python
+# Práctica 2. Análisis de seguridad y codificación de un API Rest Python
 
 ## 📝 Descripción de la práctica:
 
-En este laboratorio se espera que el alumno pueda códificar un API REST con Python usando las buenas prácticas de seguridad y pueda realizar análisis de código para buscar vulnerabilidades de código usando snyk y sonarqube.
+En este laboratorio se espera que el alumno pueda codificar un API REST con Python usando las buenas prácticas de seguridad y pueda realizar análisis de código para buscar vulnerabilidades de código usando snyk y sonarqube.
 
 ## 🎯 Objetivos:
 Al finalizar la práctica, serás capaz de:
@@ -27,12 +27,12 @@ Al finalizar la práctica, serás capaz de:
 
 Este laboratorio está dividido en las siguientes secciones:
 
-- **[Códificar Microservicio Client](#códifica-microservicio-client-return)**
+- **[Codificar Microservicio Client](#codifica-microservicio-client-return)**
 - **[Análisis de seguridad de código con SNYK](#análisis-de-seguridad-de-código-snyk-return)**
 - **[Análisis de seguridad de código con SONARQUBE](#análisis-de-seguridad-de-código-con-sonarqube-return)**
 
-### Códifica Microservicio Client [return](#instrucciones)
-Paso 1. Crea una carpeta en el escritorio, a la cual debes asignarle el nombre de **microserviceclient**.
+### Codifica Microservicio Client [return](#instrucciones)
+Paso 1. Crea una carpeta en el escritorioy asígnale el nombre **microserviceclient**.
 
 Paso 2. Abre la carpeta en **Visual Studio Code**.
 
@@ -194,7 +194,7 @@ def delete():
         if use_cases.delete_client(id):
             return {"message":"deleted"}, 200
     else:
-        return {"massage":"bad request"}, 400
+        return {"message":"bad request"}, 400
     return {"message":"server error"}, 500
 ```
 
@@ -232,7 +232,7 @@ Paso 2. Después, instala en **Visual Studio Code** la extensión  **Snyk Securi
 
 ![alt text](../images/2/4.png)
 
-Paso 3. En las opciones de **SNYK**, usar la opción **Enable Synk Code and start analyzing**.
+Paso 3. En las opciones de **SNYK**, usar la opción **Enable Snyk Code and start analyzing**.
 
 ![alt text](../images/2/5.png)
 
@@ -242,7 +242,7 @@ Paso 4. En la plataforma **Snyk**, activa el análisis de código.
 
 ![alt text](../images/2/6.png)
 
-Paso 5. Ahora, reescanea el proyecto completo y esperar el análisis de seguridad.
+Paso 5. Ahora, reescanea el proyecto completo y espera a que finalice el análisis de seguridad.
 
 ![alt text](../images/2/7.png)
 
