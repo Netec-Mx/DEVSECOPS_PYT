@@ -38,7 +38,7 @@ Paso 2. Selecciona **Create A Model**.
 
 ![alt text](../images/1/2.png)
 
-Paso 3. Con esto, se abrirá un workspace con todas las herramientas necesarias para crear un modelo. 
+Paso 3. Con esto, se abrirá un área de trabajo con todas las herramientas necesarias para crear un modelo. 
 
 ![alt text](../images/1/3.png)
 
@@ -83,7 +83,7 @@ Paso 10. Realiza una lista que identifique en qué casos del ciclo de vida del s
 - **Implementation (Implementación):**
 
     - Se codifican las mitigaciones.
-    - Se aplican prácticas seguras de desarrollo (como: validación de entradas, cifrado, entro otras).
+    - Se aplican prácticas seguras de desarrollo (como: validación de entradas, cifrado, entre otras).
 
 - **Verification (Verificación / Pruebas):**
 
