@@ -1,66 +1,46 @@
-# 2. Análisis de seguridad y códificación de un API Rest Python
+# Práctica 2. Análisis de seguridad y códificación de un API Rest Python
+
+## 📝 Descripción de la práctica:
+
 En este laboratorio se espera que el alumno pueda códificar un API REST con Python usando las buenas prácticas de seguridad y pueda realizar análisis de código para buscar vulnerabilidades de código usando snyk y sonarqube.
 
+## 🎯 Objetivos:
+Al finalizar la práctica, serás capaz de:
+- Desarrollar una API RESTful aplicando buenas prácticas en el diseño de código con Python 3.13. 
+- Analizar tu código con Snyk para identificar vulnerabilidades.
+- Evaluar la calidad y seguridad de tu código con SonarQube.
 
-## Objetivos
-- Desarrollar un api restful usando las buenas prácticas en el diseño de código con python 3.13. 
+## 🕒 Duración aproximada:
+- 60 minutos.
 
-
-- Analizar nuestro código usando snyk para buscar vulnerabilidades
-
-- Analizar nuestro código usando sonarQube para la busqueda de vulnerabilidades en nuestro código. 
-
-
----
-<!--Este fragmento es la barra de 
-navegación-->
-
-<div style="width: 400px;">
-        <table width="50%">
-            <tr>
-                <td style="text-align: center;">
-                    <a href="../Capitulo1/"><img src="../images/anterior.png" width="40px"></a>
-                    <br>anterior
-                </td>
-                <td style="text-align: center;">
-                   <a href="../README.md">Lista Laboratorios</a>
-                </td>
-<td style="text-align: center;">
-                    <a href="../Capitulo3/"><img src="../images/siguiente.png" width="40px"></a>
-                    <br>siguiente
-                </td>
-            </tr>
-        </table>
-</div>
-
----
-
-## Diagrama
-
+## 🔍 Objetivo visual:
 ![diagrama](../images/2/diagrama.png)
 
-<br>
+---
 
+**[⬅️ Atrás](https://netec-mx.github.io/DEVSECOPS_PYT/Capitulo1/)** | **[🗂️ Lista general](https://netec-mx.github.io/DEVSECOPS_PYT/)** | **[Siguiente ➡️](https://netec-mx.github.io/DEVSECOPS_PYT/Capitulo3/)**
 
-## Instrucciones
-> **IMPORTANTE:** Antes de iniciar el laboratorio es necesario tener una cuenta de **gmail** y una cuenta **github** para el registro de las herramientas. 
+---
 
-Este laboratorio esta separado en las siguientes secciones:
+## Instrucciones:
+> ⚠️ ***IMPORTANTE:** Antes de iniciar el laboratorio es necesario tener una cuenta de **gmail** y una cuenta **github** para el registro de las herramientas.*
+
+Este laboratorio está dividido en las siguientes secciones:
 
 - **[Códificar Microservicio Client](#códifica-microservicio-client-return)**
 - **[Análisis de seguridad de código con SNYK](#análisis-de-seguridad-de-código-snyk-return)**
 - **[Análisis de seguridad de código con SONARQUBE](#análisis-de-seguridad-de-código-con-sonarqube-return)**
 
 ### Códifica Microservicio Client [return](#instrucciones)
-1. Crear una carpeta en el escritorio que llamaremos **microserviceclient**
+Paso 1. Crea una carpeta en el escritorio, a la cual debes asignarle el nombre de **microserviceclient**.
 
-2. Abrimos la carpeta en **Visual Studio Code**
+Paso 2. Abre la carpeta en **Visual Studio Code**.
 
-3. Crearemos los siguientes elementos:
+Paso 3. Crea los siguientes elementos:
 
 ![alt text](../images/2/1.png)
 
-3.1 Añadimos el siguiente contenido en el archivo **requirements.txt**
+Paso 3.1. Añade el siguiente contenido en el archivo **requirements.txt**.
 
 ```properties
 flask==3.1.0
@@ -68,14 +48,13 @@ sqlalchemy==2.0.41
 mysql-connector-python==9.2.0
 ```
 
+Paso 4. En el paquete **entities**, añade dos archivos:
 
-4. En el paquete **entities**
-añadiremos 2 archivos:
+1. **_\_init__.py**: Este archivo sólo se agrega para que Python reconozca la carpeta **entities** como un paquete.
+2. **model.py**: Se define el modelo que usarás para tu microservicios.
 
-- **_\_init__.py**: Este archivo sólo se agrega para que python reconozca la carpeta **entities** cómo un paquete
-- **model.py**: Se define el modelo que usaremos para nuestro microservicios
+#### **model.py**
 
-**model.py**
 ```python
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
@@ -90,15 +69,13 @@ class Client(Base):
     address=Column(String(200))
 ```
 
-5. En la carpeta **database** añadiremos los siguientes archivos:
+Paso 5. En la carpeta **database**, añade los siguientes archivos:
 
-- **_\_init__.py**: Necesario para indicar que una carpeta es un paquete
+- **_\_init__.py**: Necesario para indicar que una carpeta es un paquete.
+- **configuration.py**: En este, se definen las variables de ambientes que debes usar en el proyecto. 
+- **db_session.py**: En este archivo se definen los objetos que te ayudarán a crear la sesión local de base de datos.
 
-- **configuration.py**: Aquí se definen las variables de ambientes que usaremos en el proyecto. 
-
-- **db_session.py**: En este archivo se definen los objetos que nos ayudarán a crear la sesión local de base de datos.
-
-**configuration.py**
+#### **configuration.py**
 ```python
 import os
 
@@ -113,7 +90,7 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS=False
 ```
 
-**db_session.py**
+#### **db_session.py**
 ```python
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -123,13 +100,12 @@ engine = create_engine(Config.SQLALCHEMY_DATABASE_URI)
 SessionLocal = sessionmaker(bind=engine)
 ```
 
-6. Ahora en la carpeta **dao** añadiremos los siguientes archivos:
+Paso 6. Posteriormente, dentro de la carpeta **dao** añade los siguientes archivos:
 
 - **_\_init__.py**: Necesario para indicar que la carpeta es un paquete.
-
 - **use_cases.py**: En este archivo se indican las operaciones del CRUD que se realizarán a la base de datos. 
 
-**use_cases.py**
+#### **use_cases.py**
 ```python
 from entities.model import Client
 from database.db_session import SessionLocal
@@ -164,13 +140,12 @@ def delete_client(id:int)->bool:
         return result>0
 ```
 
-7. Ahora en la carpeta **controller** añadiremos los siguientes archivos: 
+Paso 7. Luego, en la carpeta **controller**, añade los siguientes archivos: 
 
 - **_\_init__.py**: Necesario para indicar que la carpeta es un paquete.
+- **routes.py**: En este archivo, se indica las rutas que tendrá tu microservicio empleando HTTP protocol. 
 
-- **routes.py**: En este archivo se las rutas que tendrá nuestro microservicio usando HTTP protocol. 
-
-**routes.py**
+#### **routes.py**
 ```python
 from flask import Blueprint, request, jsonify
 from dao import use_cases
@@ -224,9 +199,9 @@ def delete():
 ```
 
 
-8. Añadir el siguiente contenido en el archivo **app.py**
+Paso 8. Añade el siguiente contenido en el archivo **app.py**.
 
-**app.py**
+#### **app.py**
 ```python
 from flask import Flask
 from database.db_session import engine
@@ -249,91 +224,88 @@ if __name__=="__main__":
 
 ### Análisis de seguridad de código SNYK [return](#instrucciones)
 
-1. Abrir el siguiente enlace **https://app.snyk.io/login**, y iniciar sesión usando su cuenta de **google**
+Paso 1. Abre el siguiente enlace **[https://app.snyk.io/login](https://app.snyk.io/login)**, e iniciar sesión utilizando tu cuenta de **Google**.
 
 ![alt text](../images/2/3.png)
 
-2. Ahora instalar en **Visual Studio Code** la extensión  **Snyk Security**
+Paso 2. Después, instala en **Visual Studio Code** la extensión  **Snyk Security**.
 
 ![alt text](../images/2/4.png)
 
-3. En las opciones de **SNYK** usar la opción **Enable Synk Code and start analyzing**
+Paso 3. En las opciones de **SNYK**, usar la opción **Enable Synk Code and start analyzing**.
 
 ![alt text](../images/2/5.png)
 
-> **IMPORTANTE:** Al sincronizar nuestro proyecto a **snyk** nos pedira iniciar sesión con nuestra cuenta creada en los puntos anteriores. 
+> ⚠️ ***IMPORTANTE:** Al sincronizar tu proyecto a **snyk**, te solicitará iniciar sesión con la cuenta que creaste en los puntos anteriores.*
 
-4. En la plataforma de **Snyk** activar el análisis de código. 
+Paso 4. En la plataforma **Snyk**, activa el análisis de código. 
 
 ![alt text](../images/2/6.png)
 
-5. Ahora reescanear el proyecto completo y esperar el análisis de seguridad.
+Paso 5. Ahora, reescanea el proyecto completo y esperar el análisis de seguridad.
 
 ![alt text](../images/2/7.png)
 
-
-6. Analizar las recomendaciones de seguridad que nos entrega la herramienta.
-
+Paso 6. Analiza las recomendaciones de seguridad que te entrega la herramienta.
 
 ### Análisis de seguridad de código con SONARQUBE [return](#instrucciones)
 
-1. Abrir el siguiente enlace **https://sonarcloud.io/login** iniciar sesión usando tu cuenta de **github**
+Paso 1. Abre el siguiente enlace: [https://sonarcloud.io/login](https://sonarcloud.io/login) e inicia sesión usando tu cuenta de **GitHub**.
 
 ![alt text](../images/2/8.png)
 
-2. Al iniciar tu cuenta de **Sonar Cloud** añadir un nuevo proyecto. 
+Paso 2. Al iniciar tu cuenta de **Sonar Cloud**, añade un nuevo proyecto. 
 
 ![alt text](../images/2/9.png)
 
-
-3. Seleccionar la opción **create a project manually**
+Paso 3. Selecciona la opción **Create a project manually**.
 
 ![alt text](../images/2/10.png)
 
+Paso 4. Crea una nueva organización bajo el nombre **netec**.
 
-4. Crear una nueva organización con el nombre **netec**
-
-5. Añadir un proyecto **Analyze projects** con las siguientes opciones:
+Paso 5. Añade un proyecto **Analyze projects** con las siguientes opciones:
 
 ![alt text](../images/2/11.png)
 
-6. Set up project con las siguientes opciones
+Paso 6. Set up project con las siguientes opciones:
 
 ![alt text](../images/2/12.png)
 
-7. Ahora en **Visual Studio Code** instalar la extensión **SonarQube for IDE**:
+Paso 7. En **Visual Studio Code**, instala la extensión **SonarQube for IDE**.
 
 ![alt text](../images/2/13.png)
 
-8. En las opciones de la extensión configurar **Add SonarQube Cloud Connection**
+Paso 8. En las opciones de la extensión, configura **Add SonarQube Cloud Connection**.
 
-9. Pulsar **Generate token**, en esta opción nos pedira iniciar sesión con nuestra cuenta de **SonarQube** y nos pedira seleccionar la **Organización**
+Paso 9. Pulsa **Generate token**, en esta opción te solicitará iniciar sesión con tu cuenta de **SonarQube**. Finalmente, selecciona la **Organización**.
 
 ![alt text](../images/2/14.png)
 
-10. Ahora debemos enlazar el proyecto creado en **sonarcloud** con el proyecto que tenemos con **visual studio code** 
+Paso 10. Ahora debemos enlazar el proyecto creado en **sonarcloud** con el proyecto que tenemos con **visual studio code** 
 
 ![alt text](../images/2/15.png)
 
-11. Esperaremos que termine de analizar todos los archivos de **Microservice Client** 
+Paso 11. Espera un poco a que finalice de analizar todos los archivos de **Microservice Client**.
 
-12. En **Security HOSTSPOSTS** observaremos el reporte de posibles problemas de seguridad:
+Paso 12. En **Security HOSTSPOSTS**, podrás observar el reporte de posibles problemas de seguridad:
 
 ![alt text](../images/2/16.png)
 
-
-13. Si visitas cada archivo de tu proyecto observaras que **Sonarqube** te realiza recomendaciones de código limpio y te permite mejorarlo. 
-
+Paso 13. Si visitas cada archivo de tu proyecto, verás que **Sonarqube** realiza recomendaciones de código limpio y te permite mejorarlo. 
 
 ![alt text](../images/2/17.png)
 
+Paso 14. Analiza los resultados
 
+## Resultado esperado:
 
-14. Analiza los resultados
-
-
-
-## Resultado esperado
-Al final de la práctica el alumno podra observar los resultados de los análisis de 2 herramientas orientadas a la seguridad de código y mejora continua del mismo. 
+Al final de la práctica, podrás observar los resultados del análisis de dos herramientas orientadas a la seguridad del código y a su mejora continua. 
 
 ![alt text](../images/2/18.png)
+
+---
+
+**[⬅️ Atrás](https://netec-mx.github.io/DEVSECOPS_PYT/Capitulo1/)** | **[🗂️ Lista general](https://netec-mx.github.io/DEVSECOPS_PYT/)** | **[Siguiente ➡️](https://netec-mx.github.io/DEVSECOPS_PYT/Capitulo3/)**
+
+---
