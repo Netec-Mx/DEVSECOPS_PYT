@@ -1,77 +1,61 @@
-# 6. Hardening básico en Ubuntu:20.04
-El alumno aprenderá cómo se asegura un servidor de Ubuntu usando un contenedor de Docker como servidor de prueba. 
+# Práctica 6. Hardening básico en Ubuntu:20.04
 
-## Objetivos
-- Crear un contenedor docker con Ubuntu
-- Aprender los diferentes tipos de seguridad que se le puede dar a un servidor
+## 📝 Planteamiento de la práctica:
+En este laboratorio aprenderás cómo asegurar un servidor Ubuntu utilizando un contenedor Docker como servidor de prueba. 
 
+## 🎯 Objetivos:
+Al finalizar la práctica, serás capaz de:
+- Crear un contenedor Docker con Ubuntu.
+- Identificar y aplicar distintos tipos de medidas de seguridad para proteger un servidor.
 
----
+## 🕒 Duración aproximada:
+- 30 minutos.
 
-<div style="width: 400px;">
-        <table width="50%">
-            <tr>
-                <td style="text-align: center;">
-                    <a href="../Capitulo5/"><img src="../images/anterior.png" width="40px"></a>
-                    <br>anterior
-                </td>
-                <td style="text-align: center;">
-                   <a href="../README.md">Lista Laboratorios</a>
-                </td>
-<td style="text-align: center;">
-                    <a href="../Capitulo7/"><img src="../images/siguiente.png" width="40px"></a>
-                    <br>siguiente
-                </td>
-            </tr>
-        </table>
-</div>
-
----
-
-
-## Diagrama
-
+## 🔍 Objetivo visual:
 ![diagrama](../images/6/diagrama.png)
 
-## Instrucciones
-Este laboratorio se separa en las siguientes secciones:
+---
+
+**[⬅️ Atrás](https://netec-mx.github.io/DEVSECOPS_PYT/Capitulo5/)** | **[🗂️ Lista general](https://netec-mx.github.io/DEVSECOPS_PYT/)** | **[Siguiente ➡️](https://netec-mx.github.io/DEVSECOPS_PYT/Capitulo7/)**
+
+---
+
+## Instrucciones:
+Este laboratorio está dividido en las siguientes secciones:
 
 - **[Crear contenedor Ubuntu Server](#crear-un-contenedor-ubuntu-return)**
 
 - **[Crear y ejecutar hardening script](#crear-y-ejecutar-hardening-script-return)**
 
 ## Crear un contenedor Ubuntu [return](#instrucciones)
-1. Abrir una terminal 
-2. En la terminal ejecutar el siguiente comando: 
+Paso 1. Abre una terminal y ejecuta el siguiente comando: 
 
 ```bash
  docker run -it --name ubuntu_server --entrypoint /bin/bash ubuntu:20.04
 ```
 
-> **NOTA:** Este comando creara un contenedor con la imagen de ubuntu:20.04 ejecutandose, al terminar de ejecutar el comando nos abrira una nueva terminal. 
+> 💡 ***Nota:** Este comando creará un contenedor con la imagen `ubuntu:20.04` en ejecución. Al finalizar, se abrirá una nueva terminal.*
 
 ![alt text](../images/6/1.png)
 
-
-
 ## Crear y ejecutar hardening script [return](#instrucciones)
 
-1. Con la terminal del contenedor abierta, nos dirigimos a la ruta **home**
+Paso 1. Con la terminal del contenedor abierta, dirígete a la ruta **home**.
 
 ```bash
 cd /home
 ```
 
-2. En la ruta home ejecutaremos los siguientes comandos:
+Paso 2. Una vez en **home**, ejecuta los siguientes comandos:
 
 ```bash
 apt-get update
 apt-get install nano
 ```
 
-> **NOTA:** Por defecto en docker no se instala un editor de archivos así que instalaremos **nano** para la edición y creación del script. 
+> 💡 ***Nota:** Por defecto, Docker no incluye un editor de archivos, así que instalaremos **nano** para poder crear y creación del script.*
 
-3. Crearemos una archivo llamado **hardening.sh** con el siguiente comando: 
+Paso 3. Crea un archivo llamado **hardening.sh** con el siguiente comando: 
 
 ```bash
 nano hardening.sh
@@ -79,18 +63,13 @@ nano hardening.sh
 
 ![alt text](../images/6/2.png)
 
-4. En el archivo añadiremos el siguiente código de bash, que añade algunas fases de seguridad: 
+Paso 4. En el archivo, añade el siguiente código en bash, que implementa algunas fases básicas de hardening: 
 
 - Actualiza el sistema.
-
-- Instala seguridad básica (fail2ban, auditd).
-
-- Configura actualizaciones automáticas.
-
-- Configura o omite firewall según sea contenedor o no.
-
+- Instala herramientas de seguridad básica (fail2ban, auditd).
+- Configura las actualizaciones automáticas.
+- Configura u omite el firewall, según sea contenedor o no.
 - Endurece SSH.
-
 - Desactiva IPv6.
 
 ```bash
@@ -163,17 +142,17 @@ echo "===== HARDENING BÁSICO FINALIZADO ====="
 echo "✅ Script ejecutado correctamente."
 ```
 
-5. Le damos permisos de ejecución
+Paso 5. Dale permisos de ejecución al script con el siguiente comando:
 
 ```bash
 chmod +x hardening.sh
 ```
 
-6. Validamos que tenga los permisos de ejecución. 
+Paso 6. Verifica que el archivo tenga permisos de ejecuciónn. 
 
 ![alt text](../images/6/3.png)
 
-7. Ejecutamos el script con el comando. 
+Paso 7. Ejecuta el script con el siguiente comando: 
 
 ```bash
 . hardening.sh
@@ -181,17 +160,18 @@ chmod +x hardening.sh
 
 ![alt text](../images/6/4.png)
 
-> **NOTA:** Algunas herramientas no se ejecutan correctamente porque nos encontramos en un contenedor y por eso no tenemos control completo del sistema operativo. 
+> 💡 ***Nota:** Algunas herramientas podrían no ejecutarse correctamente porque estamos trabajando dentro de un contenedor, lo cual limita el control total sobre el sistema operativo.*
 
-> **IMPORTANTE:** Este es un ejemplo sencillo de cómo podríamos proteger un servidor de ubuntu, aunque se le pueden añadir mas capas de seguridad en el caso de necesitarlo, pero la idea del hardening es minimizar el área de ataque de un servidor.
+> ⚠️ **IMPORTANTE:** Este es un ejemplo básico de cómo podrías proteger un servidor Ubuntu. Es posible añadir más capas de seguridad si el caso lo requiere. La idea principal del hardening es reducir al máximo el área de ataque de un servidor.
 
+## Resultado esperado: [Instrucciones](#instrucciones)
 
-
-## Resultado Esperado [Instrucciones](#instrucciones)
-
-Se espera que el alumno haya podido ejecutar el hardening de un servidor de ubuntu:20.04
-
+Se espera que hayas podido ejecutar el proceso de hardening en un servidor con Ubuntu 20.04.
 
 ![alt text](../images/6/4.png)
 
+---
 
+**[⬅️ Atrás](https://netec-mx.github.io/DEVSECOPS_PYT/Capitulo5/)** | **[🗂️ Lista general](https://netec-mx.github.io/DEVSECOPS_PYT/)** | **[Siguiente ➡️](https://netec-mx.github.io/DEVSECOPS_PYT/Capitulo7/)**
+
+---
