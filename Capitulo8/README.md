@@ -1,48 +1,29 @@
-# 8. Análisis de seguridad de Docker y Kubernetes usando Trivy, Checkov y kubescape
-En este laboratorio se espera que el alumno pueda instalar y usar herramientas de análisis de vulnerabilidades para  **docker image** y  **kubernetes**
+# Práctica 8. Análisis de seguridad de Docker y Kubernetes usando Trivy, Checkov y kubescape
 
-## Objetivos
-- Análisis de vulnerabilidades de la imágen de **docker** (**Trivy**)
+## 📝 Planteamiento de la práctica:
 
-- Despliegue de microservicio en **kubernetes**
+En este laboratorio se espera que seas capaz de instalar y utilizar herramientas de análisis de vulnerabilidades para  **Docker images** y **Kubernetes**.
 
-- Análisis de vulnerabilidades de los **YAML** de kubernetes (**Trivy**) 
+## 🎯 Objetivos:
+Al finalizar la práctica, serás capaz de:
+- Analizar vulnerabilidades en imágenes de **Docker** (**Trivy**).
+- Desplegar un microservicio en **Kubernetes**.
+- Analizar vulnerabilidades en archivos **YAML** de Kubernetes (**Trivy**).
+- Analizar vulnerabilidades en el clúster de Kubernetes (**kubescape**). 
 
-- Análisis de vulnerabilidades del clúster de kubernetes (**kubescape**). 
+## 🕒 Duración aproximada:
+- 80 minutos.
 
----
-
-<div style="width: 400px;">
-        <table width="50%">
-            <tr>
-                <td style="text-align: center;">
-                    <a href="../Capitulo7/"><img src="../images/anterior.png" width="40px"></a>
-                    <br>anterior
-                </td>
-                <td style="text-align: center;">
-                   <a href="../README.md">Lista Laboratorios</a>
-                </td>
-<td style="text-align: center;">
-                    <a href="../Capitulo9/"><img src="../images/siguiente.png" width="40px"></a>
-                    <br>siguiente
-                </td>
-            </tr>
-        </table>
-</div>
-
----
-
-
-## Diagrama
-
+## 🔍 Objetivo visual:
 ![diagrama](../images/8/diagrama.png)
 
+> ⚠️ ***IMPORTANTE**: Antes de comenzar el laboratorio, asegúrate de tener un clúster de Kubernetes configurado. Te recomendamos usar **[Minikube](https://minikube.sigs.k8s.io/docs/start/?arch=%2Fwindows%2Fx86-64%2Fstable%2F.exe+download)**, , aunque también puedes trabajar con un clúster en la nube*
 
-> **IMPORTANTE**: Antes de comenzar el laboratorio asegurate de tener un clúster de kubernetes
-configurado, te recomiendo usar **[Minikube](https://minikube.sigs.k8s.io/docs/start/?arch=%2Fwindows%2Fx86-64%2Fstable%2F.exe+download)** ó puedes usar un clúster en la nube.
+---
 
+**[⬅️ Atrás](https://netec-mx.github.io/DEVSECOPS_PYT/Capitulo7/)** | **[🗂️ Lista general](https://netec-mx.github.io/DEVSECOPS_PYT/)** | **[Siguiente ➡️](https://netec-mx.github.io/DEVSECOPS_PYT/Capitulo9/)**
 
-
+---
 ## Instrucciones
 Este laboratorio esta dividido en las siguientes secciones:
 
@@ -56,26 +37,26 @@ Este laboratorio esta dividido en las siguientes secciones:
 
 ## Análisis de vulnerabilidades de una imagen de Docker [return](#instrucciones)
 
-> **IMPORTANTE:** Este laboratorio necesita que tengas cargada tu imágen de docker de tu microservicio cliente en **docker hub** en el caso de no tenerlo regresar al laboratorio **Añadir seguridad en CICD para el Microservicio Cliente**
+> ⚠️ ***IMPORTANTE**: Este laboratorio requiere que tengas cargada la imagen de Docker de tu microservicio cliente en Docker Hub. Si aún no la has subido, regresa al laboratorio **Añadir seguridad en CICD para el Microservicio Cliente**.*
 
-> **IMPORTANTE:** Para este laboratorio es necesario tener instalado el gestor de paquetes **Chocolatey** en el caso de no tenerlo ver las opciones de instalación **[aquí](https://chocolatey.org/install)**
+> ⚠️ ***IMPORTANTE**: Para este laboratorio, es necesario tener instalado el gestor de paquetes Chocolatey. Si aún no lo tienes, puedes consultar las opciones de instalación **[aquí](https://chocolatey.org/install)**.*
 
-1. Abrir una terminal de windows en modo **admninistrador**
+Paso 1. Abre una terminal de Windows en modo **Admninistrador**.
 
-2. Ejecutar el siguiente comando para instalar a **trivy**
+Paso  2. Ejecuta el siguiente comando para instalar **Trivy**:
 
 ```bash
 choco install trivy
 ```
 ![alt text](../images/8/1.png)
 
-3. Ahora usaremos el siguiente comando para descargar nuestra imagen localmente: 
+Paso 3. Ahora usa el siguiente comando para descargar tu imagen localmente: 
 
 ```bash
 docker pull turepositorio/devsecopspy:microserviceclient
 ```
 
-4. Validamos que nuestra imágen se encuentre localmente: 
+Paso 4. Valida que tu imagen se encuentre localmente: 
 
 ```bash
 docker image ls
@@ -83,8 +64,7 @@ docker image ls
 
 ![alt text](../images/8/2.png)
 
-
-5. Ahora realizaremos un análisis de seguridad de nuestra imagén donde sólo se muestran las vulnerabilidades altas y criticas:
+Paso 5. Ahora realizaremos un análisis de seguridad sobre nuestra imagen, mostrando únicamente las vulnerabilidades de nivel alto y crítico:
 
 ```
 trivy image --severity HIGH,CRITICAL repositorio/devsecopspy:microserviceclient
@@ -92,38 +72,36 @@ trivy image --severity HIGH,CRITICAL repositorio/devsecopspy:microserviceclient
 
 ![alt text](../images/8/3.png)
 
+Paso 6. Analiza todas las vulnerabilidades. Como puedes notar, existen solo 4 vulnerabilidades provenientes de la imagen base **python:3.13-slim**. Para resolverlas completamente, se recomienda lo siguiente:
 
-
-6. Análizamos todas las vulnerabilidades y cómo podemos notar existen sólo 4 vulnerabilidades de la imagen base de **python:3.13-slim**, para resolverlar completamente se recomienda lo siguiente:
-
-- Crear nuestra propia imagen personalizada de python **muchas empresas hacen esto**
-
-- Sólo exponer los puertos necesarios de esta forma se minimiza las posibles entradas a nuestro contenedor. 
+- Crear tu propia imagen personalizada de Python **(muchas empresas adoptan esta práctica)**.
+- Exponer únicamente los puertos necesarios, para minimizar posibles puntos de entrada al contenedor. 
 
 
 ## Despliegue de microservicio cliente en Kubernetes [return](#instrucciones)
-> **IMPORTANTE:** Para esta sección es necesario que se tenga instalado **minikube y kubectl**  en el caso de no tenerlos instalarlos **[minikube installation](https://minikube.sigs.k8s.io/docs/start/)** y **[kubectl installation](https://kubernetes.io/docs/tasks/tools/)**
+> ⚠️ ***IMPORTANTE:** Para esta sección, necesitas tener instalados Minikube y kubectl. Si aún no los tienes, puedes instalarlos desde los siguientes enlaces:
+> **[Minikube installation](https://minikube.sigs.k8s.io/docs/start/)**
+> **[Kubectl installation](https://kubernetes.io/docs/tasks/tools/)***
 
-1. Abrir una terminal de windows 
-2. Ejecutar el siguiente comando para iniciar un clúster de kubernetes de pruebas:
+Paso 1. Abre una terminal de Windows. 
+Paso 2. Ejecuta el siguiente comando para iniciar un clúster de Kubernetes de prueba:
 
 ```bash
 minikube start --driver=docker
 ```
-> **IMPORTANTE:** Este comando tardará unos minutos. 
+> ⚠️ ***IMPORTANTE:** Este comando tardará unos minutos.*
 
 ![alt text](../images/8/4.png)
 
-3. Crearemos una carpeta en el escritorio que llamaremos 
-**kubernetes** 
+Paso 3. Crea una carpeta en el escritorio y llámala **kubernetes**.
 
-4. Abrimos la carpeta en **VSCode**
+Paso 4. Abre la carpeta en **Visual Studio Code**.
 
-5. Añadiremos los siguientes archivos a la carpeta: 
+Paso 5. Añade los siguientes archivos dentro de la carpeta: 
 
 ![alt text](../images/8/5.png)
 
-6. En el archivo **db-secrets.yaml** añadiremos el siguiente contenido: 
+Paso 6. En el archivo **db-secrets.yaml** añadiremos el siguiente contenido: 
 
 ```yaml
 apiVersion: v1
@@ -136,13 +114,13 @@ data:
   DB_PASSWORD: bmV0ZWMxMjM=
 ```
 
-> **IMPORTANTE:** El valor de DB_NAME y DB_PASSWORD estan codificados en **base64**, en el caso que requieras codificar tu valor usa el siguiente comando: 
+> ⚠️ ***IMPORTANTE:** Los valores de DB_NAME y DB_PASSWORD están codificados en Base64.Si necesitas codificar tus propios valores, puedes usar el siguiente comando:*
 
 ```powershell
 [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes("dato"))
 ```
 
-7. En el archivo **microservice-secrets.yaml** añadiremos el siguiente contenido: 
+Paso 7. En el archivo **microservice-secrets.yaml**, añade el siguiente contenido: 
 
 ```yaml
 apiVersion: v1
@@ -156,9 +134,9 @@ data:
   TENANT_ID: <tenantid base64>
 ```
 
-> **IMPORTANTE:** **CLIENT_ID, APP_SECRET Y TENANT_ID** són los valores de tu **app registration** creada anteriormente y también deben estar códificadas en **base64**
+> ⚠️ ***IMPORTANTE:** Los valores de **CLIENT_ID, APP_SECRET Y TENANT_ID** corresponden a tu **app registration** creada anteriormente, y también deben estar codificados en **base64**.*
 
-8. En el archivo **microclient.yaml** añadir el siguiente contenido: 
+Paso 8. En el archivo **microclient.yaml**, añade el siguiente contenido: 
 
 ```yaml
 #.-.-.-.Service and deployment MySQL.-.-.-.
@@ -269,9 +247,9 @@ spec:
                 key: TENANT_ID
 ```
 
-> **IMPORTANTE:** En la sección del despliegue del **Microservicio cliente** módifica la imagen de docker por la tuya. 
+> ⚠️ ***IMPORTANTE:** En la sección del despliegue del **microservicio cliente**, asegúrate de modificar la imagen de Docker por la tuya.*
 
-9. Abre una terminal en la carpeta de **kubernetes** y ejecuta el siguiente comando: 
+Paso 9. Abre una terminal en la carpeta **kubernetes** y ejecuta el siguiente comando: 
 
 ```bash
 kubectl apply -f .
@@ -279,7 +257,7 @@ kubectl apply -f .
 
 ![alt text](../images/8/6.png)
 
-10. Para validar que todo funciona bien ejecuta el siguiente comando: 
+Paso 10. Para validar que todo funciona correctamente, ejecuta el siguiente comando: 
 
 ```bash
 kubectl get deployments
@@ -287,31 +265,30 @@ kubectl get deployments
 
 ![alt text](../images/8/7.png)
 
-> **NOTA:** El mensaje de READY con un 1 significa que el despliegue y los pods estan funcionando correctamente. 
+>  💡 ***Nota:** El mensaje READY con un valor de 1 indica que el despliegue y los pods están funcionando correctamente.*
 
-11. Ejecutar el siguiente comando para probar el microservicio cliente: 
+Paso 11. Ejecuta el siguiente comando para probar el microservicio cliente: 
 
 ```bash
 minikube service micro-service
 ```
-
-> **NOTA:** El comando anterior nos entrega un URL para poder probar el microservicio fuera del clúster de kubernetes. 
+>  💡 ***Nota:** Este comando te proporcionará una URL pública que te permitirá probar el microservicio desde fuera del clúster de Kubernetes.* 
 
 ![alt text](../images/8/8.png)
 
-12. Abrir postman/insomnia y sustituir **localhost:8082** por el uri copiado y probar las operaciones del microservicio
+Paso 12. Abre Postman o Insomnia, sustituye **localhost:8082** por la URL copiada y prueba las operaciones del microservicio.
 
 ![alt text](../images/8/9.png)
 
-
 ## Análisis de seguridad de los YAML de despliegue usando Trivy y Checkov [return](#instrucciones)
 
-> **IMPORTANTE:** Para esta sección se necesita que se tengan instalado **Trivy** y **Checkov** 
+> ⚠️ ***IMPORTANTE:** Para esta sección, necesitas tener instalados **Trivy** y **Checkov**.*
 
-1. Abrir una nueva terminal de windows
-2. En la terminal dirigirnos a la carpeta **kubernetes** donde se encuentran los **YAMLS** de nuestro microservicio. 
+Paso 1. Abre una nueva terminal de Windows.
 
-3. En la terminal ejecutaremos el siguiente comando para el análisis de **trivy**:
+Paso 2. En la terminal, navega hasta la carpeta **kubernetes**, donde se encuentran los archivos **YAMLS** de tu microservicio. 
+
+Paso 3. Ejecuta el siguiente comando para realizar el análisis con **Trivy**:
 
 ```bash
 trivy config --severity HIGH,CRITICAL .
@@ -319,10 +296,9 @@ trivy config --severity HIGH,CRITICAL .
 
 ![alt text](../images/8/10.png)
 
-4. Análizar las recomendaciones que nos da y los urls de documentación. 
+Paso 4. Analiza las recomendaciones que te proporciona, así como los enlaces a la documentación que ofrece para cada hallazgo. 
 
-5. Ahora en la terminal realizaremos el análisis de checkov usando el siguiente comando estando en la carpeta de **kubernetes**: 
-
+Paso 5. Ahora, en la misma terminal y desde la carpeta kubernetes, realiza el análisis con Checkov ejecutando el siguiente comando en la carpeta **kubernetes**: 
 
 ```bash
 checkov -d . 
@@ -330,12 +306,11 @@ checkov -d .
 
 ![alt text](../images/8/11.png)
 
-6. Análizar las recomendaciones de seguridad y validar si nos da las mismas con ambas herramientas. 
-
+Paso 6. Revisa las recomendaciones de seguridad que te da y valida si coinciden (total o parcialmente) con las que proporcionóambas herramientas. 
 
 ## Análisis de configuración de clúster de kubernetes [return](#instrucciones)
 
-1. Instalar la herramienta kubescape para el análisis del clúster de kubernetes. 
+Paso 1. Instala la herramienta Kubescape para realizar el análisis de seguridad del clúster de Kubernetes. 
 
 ```bash
 choco install kubescape
@@ -343,25 +318,28 @@ choco install kubescape
 
 ![alt text](../images/8/12.png)
 
-2. Ejecutar el siguiente comando para el análisis de seguridad del clúster de kubernetes. 
+Paso 2. Para analizar la seguridad del clúster de Kubernetes, ejecuta el siguiente comando: 
 
 ```bash
 kubescape scan framework nsa --exclude-namespaces kube-system,kube-public
 ```
 
-> **NOTA:** El comando anterior nos dice que se analizará el clúster de kubernetes omitiendo los namespaces **kube-system y kube-public**
+>  💡 ***Nota:** El comando anterior indica que se analizará el clúster de Kubernetes, omitiendo los namespaces **kube-system y kube-public**.*
 
 ![alt text](../images/8/13.png)
 
-3. Análizar las recomendaciones para el clúster de kubernetes. 
+Paso 3. Analiza las recomendaciones para el clúster de Kubernete. 
 
-> **NOTA:** Al se un clúster de pruebas no es necesario realizar una modificación de los archivo de configuración, pero tomarlas en cuenta en sistemas de producción. 
+>  💡 ***Nota:** Al tratarse de un clúster de pruebas, no es necesario modificar los archivos de configuración. Sin embargo, es importante tomar en cuenta estas recomendaciones en entornos de producción.*
 
-## Resultado Esperado [instrucciones](#instrucciones)
+## Resultado esperado: [instrucciones](#instrucciones)
 
-Al llegar hasta aquí el alumno tendrá 3 informes de seguridad de cada una de las herramientas. 
-
+Al llegar a este punto, tendrás tres informes de seguridad, generados por cada una de las herramientas utilizadas. 
 
 ![alt text](../images/8/14.png)
 
+---
 
+**[⬅️ Atrás](https://netec-mx.github.io/DEVSECOPS_PYT/Capitulo7/)** | **[🗂️ Lista general](https://netec-mx.github.io/DEVSECOPS_PYT/)** | **[Siguiente ➡️](https://netec-mx.github.io/DEVSECOPS_PYT/Capitulo9/)**
+
+---
