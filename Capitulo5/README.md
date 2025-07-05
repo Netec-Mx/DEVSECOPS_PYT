@@ -1,54 +1,41 @@
-# 5. Añadir seguridad en CICD para el Microservicio Cliente
-Para automatizar la construcción, pruebas y liberación del proyecto es necesario Crear un CI/CD usando github actions. Aunque nos centraremos más en las pruebas de seguridad de nuestro proyecto. 
+# Práctica 5. Añadir seguridad en CI/CD para el Microservicio Cliente
 
+## 📝 Planteamiento de la práctica:
+Para automatizar la construcción, las pruebas y la liberación del proyecto, es necesario crear un flujo de CI/CD usando GitHub Actions. Aunque este flujo puede incluir varias etapas, nos enfocaremos principalmente en las pruebas de seguridad del proyecto. 
 
-## Objetivos
-- Configurar un repositorio en github
-- Sincronizar nuestro microservicio cliente con el repositorio remoto
+## 🎯 Objetivos:
+Al finalizar la práctica, serás capaz de:
+- Configurar un repositorio en GitHub.
+- Sincronizar tu microservicio cliente con el repositorio remoto.
 - Crear un CI/CD con pruebas de seguridad para validar automaticamente el código del microservicio. 
 
----
-<div style="width: 400px;">
-        <table width="50%">
-            <tr>
-                <td style="text-align: center;">
-                    <a href="../Capitulo4/"><img src="../images/anterior.png" width="40px"></a>
-                    <br>anterior
-                </td>
-                <td style="text-align: center;">
-                   <a href="../README.md">Lista Laboratorios</a>
-                </td>
-<td style="text-align: center;">
-                    <a href="../Capitulo6/"><img src="../images/siguiente.png" width="40px"></a>
-                    <br>siguiente
-                </td>
-            </tr>
-        </table>
-</div>
+## 🕒 Duración aproximada:
+- 60 minutos.
 
----
-
-## Diagrama
-
+## 🔍 Objetivo visual:
 ![diagrama](../images/5/diagrama.png)
 
-> **IMPORTANTE:** Antes de comenzar este laboratorio necesitas tener una cuenta de **Github gratuita**, y una cuenta de **Docker hub**, en el caso de no tenerlas es necesario los siguientes enlaces **[Github Free account](https://github.com/)** y **[Docker hub Free account](https://hub.docker.com/)**
+> **IMPORTANTE:** Antes de comenzar este laboratorio necesitas tener una cuenta de **GitHub gratuita**, y una cuenta de **Docker hub**, en el caso de no tenerlas es necesario los siguientes enlaces **[Github Free account](https://github.com/)** y **[Docker hub Free account](https://hub.docker.com/)**
 
+---
 
+**[⬅️ Atrás](https://netec-mx.github.io/DEVSECOPS_PYT/Capitulo4/)** | **[🗂️ Lista general](https://netec-mx.github.io/DEVSECOPS_PYT/)** | **[Siguiente ➡️](https://netec-mx.github.io/DEVSECOPS_PYT/Capitulo6/)**
 
-## Instrucciones
-Este laboratorio esta separado en las siguientes secciones: 
+---
 
-- **[Configuración repositorio en github](#configuración-repositorio-en-github-return)**
+## Instrucciones:
+Este laboratorio está dividido en las siguientes secciones:
+- **[Configuración repositorio en GitHub](#configuración-repositorio-en-github-return)**
 
 - **[Configuración Microservicio Cliente](#configuración-microservicio-cliente-return)**
 
-- **[Crear github Action](#crear-github-action-return)**
+- **[Crear GitHub Action](#crear-github-action-return)**
 
-- **[Validar Github Action](#validar-github-action-return)**
+- **[Validar GitHub Action](#validar-github-action-return)**
 
-## Configuración repositorio en github [return](#instrucciones)
-1. Crear un nuevo repositorio en github con los siguientes datos: 
+## Configuración repositorio en GitHub [return](#instrucciones)
+
+Paso 1. Crear un nuevo repositorio en GitHub con los siguientes datos: 
 - **repository name:** repomicroservice
 
 - **Public:** checked
@@ -57,22 +44,19 @@ Este laboratorio esta separado en las siguientes secciones:
 
 ![alt text](../images/5/1.png)
 
-2.  Al crear el repositorio nos mostrará algunos comandos importantes, vamos a copiar el comando que comience con **git remote add origin url_repositorio** y activamos **HTTPS**
+Paso 2.  Al crear el repositorio nos mostrará algunos comandos importantes, vamos a copiar el comando que comience con **git remote add origin url_repositorio** y activamos **HTTPS**
 
 ![alt text](../images/5/2.png)
 
-3. Fin configuración repositorio remoto. 
-
+Paso 3. Fin configuración repositorio remoto. 
 
 ## Configuración Microservicio cliente [return](#instrucciones)
 
 > **IMPORTANTE:** Para esta sección es fundamental tener instalado **git** en el caso de no tenerlo, descargarlo de la siguiente ruta **[git download](https://git-scm.com/downloads)**
 
+Paso 1. Abrir el microservicio cliente en **Visual Studio Code** 
 
-
-1. Abrir el microservicio cliente en **Visual Studio Code** 
-
-2. Modificar el archivo **secrets.py** que se encuentra en la carpeta **database** y comentar la carga de las variables de ambiente:
+Paso 2. Modificar el archivo **secrets.py** que se encuentra en la carpeta **database** y comentar la carga de las variables de ambiente:
 
 **secrets.py**
 ```python
@@ -100,7 +84,7 @@ def get_secret(name_secret:str)->str:
         print(f"error get secret {ex}")
 ```
 
-2. Crear un archivo que llamaremos **.dockerignore** en la raíz del proyecto, donde agregaremos lo siguiente:
+Paso 3. Crear un archivo que llamaremos **.dockerignore** en la raíz del proyecto, donde agregaremos lo siguiente:
 
 **.dockerignore**
 ```properties
@@ -113,7 +97,7 @@ __pycache__/
 cicd.yaml
 ```
 
-3. Crearemos un archivo que llamaremos **Dockerfile** con el siguiente contenido: 
+Paso 4. Crearemos un archivo que llamaremos **Dockerfile** con el siguiente contenido: 
 
 ```Dockerfile
 # Dockerfile
@@ -127,7 +111,7 @@ EXPOSE 8082
 CMD ["gunicorn", "--bind", "0.0.0.0:8082", "app:app"]
 ```
 
-4. Ahora agregaremos un nuevo archivo en la raíz del proyecto con el nombre **.gitignore** donde agregaremos el siguiente contenido: 
+Paso 5. Ahora agregaremos un nuevo archivo en la raíz del proyecto con el nombre **.gitignore** donde agregaremos el siguiente contenido: 
 
 **.gitignore**
 ```properties
@@ -138,8 +122,7 @@ __pycache__/
 *.pyc
 ```
 
-
-5. Abrimos una terminal en la carpeta donde se encuentra nuestro proyecto y ejecutamos los siguientes comandos:
+Paso 6. Abrimos una terminal en la carpeta donde se encuentra nuestro proyecto y ejecutamos los siguientes comandos:
 
 ```bash
 git init
@@ -161,28 +144,23 @@ git remote add origin <URI_repository_git>
 git push --set-upstream origin master
 ```
 
-> **IMPORTANTE:** Este último comando nos pedirá iniciar sesión en nuestra cuenta de github
+> **IMPORTANTE:** Este último comando nos pedirá iniciar sesión en nuestra cuenta de GitHub
 
-
-6. Al visitar nuestro repositorio en github podremos observar que nuestro código de python ya se encuentra cargado en **github**
+Paso 7. Al visitar nuestro repositorio en GitHub podremos observar que nuestro código de python ya se encuentra cargado en **GitHub**
 
 ![alt text](../images/5/3.png)
 
+## Crear GitHub Action [return](#instrucciones)
 
-
-
-## Crear github Action [return](#instrucciones)
-
-1. En el repositorio de **Github** donde se encuentra tu **Microservicio cliente** buscaremos la sección **Actions**
+Paso 1. En el repositorio de **GitHub** donde se encuentra tu **Microservicio cliente**, ve a la sección **Actions**.
 
 ![alt text](../images/5/9.png)
 
-2. Seleccionaremos la opción **set up a workflow yourself**
+Paso 2. Selecciona la opción **set up a workflow yourself**.
 
 ![alt text](../images/5/10.png)
 
-3. Añadir el siguiente flujo YAML, para realizar el CICD
-
+Paso 3. Añade el siguiente flujo YAML para configurar el CI/CD.
 
 ```yaml
 name: CI/CD Microservice Python
@@ -240,33 +218,31 @@ jobs:
 
 ```
 
-
-
-4. Realizar el **commit** 
-5. Añadir los siguientes **Secretos** en el repositorio
+Paso 4. Realizar el **commit** de los cambios.
+Paso 5. Agrega los siguientes **Secretos** en el repositorio.
 
 ![alt text](../images/5/11.png)
 
+## Validar GitHub Action [return](#instrucciones)
 
+Paso 1. Dirígete a la sección de **Actions** en tu repositorio.
 
-## Validar Github Action [return](#instrucciones)
-
-1. Ir a la sección de **Actions** en nuestro repositorio.
-
-2. Encontraremos nuestro **action** ejecutado correctamente
+Paso 2. Verifica que tu **action** se haya ejecutado correctamente.
 
 ![alt text](../images/5/12.png)
 
-3. Abrir nuestra cuenta de **docker hub** y validar que se haya creado el repositorio con nuestra imagen lista para ser usada en un despliegue. 
+Paso 3. Abre tu cuenta de **Docker Hub** y valida que se haya creado el repositorio con tu imagen, lista para ser usada en un despliegue. 
 
 ![alt text](../images/5/13.png)
 
+## Resultado esperado: [Instrucciones](#instrucciones)
 
-
-## Resultado Esperado [Instrucciones](#instrucciones)
-
-Se espera que el alumno al final de la ejecución del flujo pueda observar su imagen en su repositorio de **github**
+Al finalizar la ejecución del flujo, se espera que puedas ver la imagen generada en tu repositorio de **GitHub**
 
 ![alt text](../images/5/13.png)
 
+---
 
+**[⬅️ Atrás](https://netec-mx.github.io/DEVSECOPS_PYT/Capitulo4/)** | **[🗂️ Lista general](https://netec-mx.github.io/DEVSECOPS_PYT/)** | **[Siguiente ➡️](https://netec-mx.github.io/DEVSECOPS_PYT/Capitulo6/)**
+
+---
