@@ -1,149 +1,123 @@
-# 3. Analizar dependencias y librerias del Microservicio Cliente usando snyk y safety python.  
+# Práctica 3. Analizar dependencias y librerías del Microservicio Cliente usando Snyk y Safety para Python
 
-En este labatorio se espera que los alumnos puedan revisar la salud de las dependencias de su Microservicio usando **SNYK y safety para python**
+## 📝 Planteamiento de la práctica:
+En este laboratorio, se espera que puedas revisar la salud de las dependencias de su microservicio usando **Snyk y Safety para Python**.
 
+## 🎯 Objetivos:
+Al finalizar la práctica, serás capaz de:
+- Usar **Snyk** para escanear tu proyecto y detectar vulnerabilidades en sus dependencias.
+- Usar **Safety** para identificar vulnerabilidades en las dependencias definidas en el archivo **requirements.txt**.
 
-## Objetivos
-- Usar **SNYK** para escanear el proyecto y buscar vulnerabilidades en sus dependencias. 
+## 🕒 Duración aproximada:
+- 40 minutos.
 
-- Usar **safety**
-para buscar vulnerabilidades en las dependencias del archivo **requirements.txt** 
-
----
-
-<div style="width: 400px;">
-        <table width="50%">
-            <tr>
-                <td style="text-align: center;">
-                    <a href="../Capitulo2/"><img src="../images/anterior.png" width="40px"></a>
-                    <br>anterior
-                </td>
-                <td style="text-align: center;">
-                   <a href="../README.md">Lista Laboratorios</a>
-                </td>
-<td style="text-align: center;">
-                    <a href="../Capitulo4/"><img src="../images/siguiente.png" width="40px"></a>
-                    <br>siguiente
-                </td>
-            </tr>
-        </table>
-</div>
-
----
-
-
-## Diagrama
-
+## 🔍 Objetivo visual:
 ![diagrama](../images/3/diagrama.png)
 
+---
 
-## Instrucciones
-Esta práctica se separa en las siguientes secciones:
+**[⬅️ Atrás](https://netec-mx.github.io/DEVSECOPS_PYT/Capitulo2/)** | **[🗂️ Lista general](https://netec-mx.github.io/DEVSECOPS_PYT/)** | **[Siguiente ➡️](https://netec-mx.github.io/DEVSECOPS_PYT/Capitulo4/)**
 
+---
+
+## Instrucciones:
+Este laboratorio está dividido en las siguientes secciones:
 - **[Análisis de dependencias usando SNYK](#análisis-de-dependencias-usando-snyk-return)**
 
-- **[Análisis de dependencias usando safety dependency check](#análisis-de-dependencias-usando-owasp-dependency-check-return)**
-
+- **[Análisis de dependencias usando safety dependency check](#análisis-de-dependencias-usando-safety-dependency-check)**
 
 ## Análisis de dependencias usando SNYK [return](#instrucciones)
-> **IMPORTANTE:** Se necesita tu cuenta de snyk del laboratorio **Análisis de seguridad y códificación de un API Rest Python Flask** en el caso que no se tenga, es necesario regresar al laboratorio anterior y seguir las instrucciones de cómo obtenerla. 
 
-1. Abrir **Visual Studio Code**
-2. Abrir el proyecto del **MicroservicioCliente** 
-3. Validar que se tenga instalada la extensión **Snyk Security** 
+> ⚠️ _**IMPORTANTE:** Necesitas tu cuenta de Snyk creada en el laboratorio **Análisis de seguridad y codificación de una API REST con Python Flask**. Si aún no la tienes, regresa a ese laboratorio y sigue las instrucciones para obtenerla._
+
+Paso 1. Abre **Visual Studio Code**.
+Paso 2. De igual forma, abre el proyecto del **MicroservicioCliente**.
+Paso 3. Valida que tienes instalada la extensión **Snyk Security**.
 
 ![alt text](../images/3/1.png)
 
-4. En la barra lateral de VSCode pulsa el icóno de **snyk**
+Paso 4. En la barra lateral de **Visual Studio Code**, pulsa el ícono de **snyk**.
 
 ![alt text](../images/3/2.png)
 
-5. Realiza un nuevo escaneo, pero ahora tomaremos especial cuidado en la sección **Open Source Security**
+Paso 5. Realiza un nuevo escaneo, pero esta vez pon especial atención en la sección **Open Source Security**.
 
 ![alt text](../images/3/3.png)
 
-
-6. Si observamos existen 2 problemas de seguridad en 2 dependencias. Le damos click a cualquiera de las 2  para observar información acerca de este problema. 
-
+Paso 6. Verás que hay dos problemas de seguridad en dos dependencias. Haz clic en cualquiera de ellos para consultar más información sobre el problema. 
 
 ![alt text](../images/3/4.png)
 
+Paso 7.  La herramienta te alertará que la dependencia **MySQL connector** tiene un problema.
 
-7. La herramienta nos alerta que la dependencia de **MySQL connector** tiene un problema 
-
-8. Abrimos la página de snyk para poder observar más sobre este problema. 
-
+Paso 8. Abre la página de **Snyk** para obtener más detalles sobre este problema. 
 
 ![alt text](../images/3/5.png)
 
-> **NOTA:** Este problema de seguridad significa que un atacante se podría conectar a nuestro sistema de archivos usando variaciones de rutas para tratar de obtener información sensible dentro de la aplicación. 
+>  💡 ***Nota:** Este problema de seguridad significa que un atacante se podría conectar a nuestro sistema de archivos usando variaciones de rutas para tratar de obtener información sensible dentro de la aplicación.*
 
-9. Ahora... ¿Debería asustarme esta situación?. La respuesta corta es no, siempre y cuando se tomen precauciones cómo:
+Paso 9. Ahora bien... ¿deberías asustarte por esta situación? La respuesta corta es: **no**, siempre y cuando tomes precauciones como:
 
-- Ocultar la información sensible de nuestra aplicación. 
+- Ocultar la información sensible de tu aplicación. 
+- Restringir el acceso a la base de datos solo a las IPs necesarias. 
+- Usar una **VPN** o un **SSH tunnel** para conectarte a recursos externos.
+- Mantener tus recursos dentro de una red privada.
 
-- Restringir el acceso en nuestra base de datos sólo a las ips necesarias. 
-
-- Usar **VPN o SSH tunnel** para conectarse a recursos externos
-
-- Tener nuestros recursos dentro de una red privada.
-
-10. Por el momento nuestra aplicación no requiere de una modificación a nivel de dependencia. Pero si es importante tomar precauciones. 
-
+Paso 10. Por ahora, nuestra aplicación no requiere modificar las dependencias. Sin embargo, es importante que tomes las precauciones mencionadas. 
 
 ## Análisis de dependencias usando safety dependency check [return](#instrucciones)
 
 **safety** es un escáner de vulnerabilidades de dependencia diseñado para mejorar la seguridad de la cadena de suministro de software y permitir el uso seguro de paquetes de Python, desde el desarrollo hasta la implementación.
 
-1. Abrir el proyecto del **Microservicio Cliente** 
+Paso 1. Abre el proyecto del **Microservicio Cliente** 
 
-2. Abrir una terminal de visual studio code. 
+Paso 2. Abre una terminal en **Visual Studio Code**. 
 
-3. Instalar safety usando el siguiente comando:
+Paso 3. Instala **Safety* usando el siguiente comando:
 
 ```bash
 pip install safety
 ```
 
-4. Ahora realizar un escaneo de seguridad usando el comando:
+Paso 4. Ahora, realiza un escaneo de seguridad usando el siguiente comando:
 
 ```bash
 safety scan
 ```
 
-5. Al ejecutar el comando anterior necesitará registrarse a la herramienta de safety para tener acceso a la base de datos de vulnerabilidades:
+Paso 5. Al ejecutar el comando anterior, necesitarás registrarte en la herramienta Safety para poder acceder a su base de datos de vulnerabilidades:
 
 ![alt text](../images/3/6.png)
 
-6. Al aceptar el registro nos abrirá una página web pidiendo un registro (*se recomienda usar tu cuenta de gmail*).
+Paso 6. Al aceptar el registro, se abrirá una página web donde deberás completar tu registro
+
+> 💡***Nota:** Se recomienda usar tu cuenta de Gmail.*
 
 ![alt text](../images/3/7.png)
 
-7. Al finalizar el registro podemos realizar el escaneo de seguridad usando de nuevo el comando:
+Paso 7. Al finalizar el registro, podrás realizar el escaneo de seguridad usando nuevamente el comando:
 
 ```bash
 safety scan
 ```
 
-
 ![alt text](../images/3/8.png)
 
-8. Si podemos observar en el análisis de seguridad nos indica que hay una vulnerabilidad en la dependencia de **flask**. 
+Paso 8. Como puedes ver en el análisis de seguridad, se detectó una vulnerabilidad en la dependencia **flask**. 
 
 ![alt text](../images/3/9.png)
 
-
-9. Si nos vamos a la página de **safety** podemos encontrar más información sobre esta vulnerabilidad. 
+Paso 9. Si vistitas la página de **safety**, podrás encontrar más información sobre esta vulnerabilidad. 
 
 ![alt text](../images/3/10.png)
 
-10. Al ser una vulnerabilidad con un score de severidad de 7.5 es recomendable solucionarla. La documentación nos dice que usemos la versión 3.1.1. 
+Paso 10. Al ser una vulnerabilidad con un score de severidad de 7.5 es recomendable solucionarla. La documentación nos dice que usemos la versión 3.1.1. 
 
-11. Abrir el archivo **requirements.txt** y modificar la versión de **flask** a la versión 3.1.1
+Paso 11. Abre el archivo **requirements.txt** y actualiza la versión de **Flask** a 3.1.1.
 
 ![alt text](../images/3/11.png)
 
-12. Realiza de nuevo un escaneo usando el comando:
+Paso 12. Nuevamente, realiza un escaneo usando el comando:
 
 ```bash
 safety scan
@@ -151,14 +125,11 @@ safety scan
 
 ![alt text](../images/3/12.png)
 
-> **NOTA:** Observamos que ya no muestra vulnerabilidades al cambiar la versión de flask.
+> 💡 ***NOTA:** Observa que ya no muestra vulnerabilidades al cambiar la versión de Flask.*
 
+## Resultado esperado: [Instrucciones](#instrucciones)
 
-
-
-## Resultado esperado [Instrucciones](#instrucciones)
-
-Al finalizar el alumno tendrá 2 análisis de de vulnerabilidades de dependencias en python.
+Al finalizar, tendrás dos análisis de vulnerabilidades en dependencias de Python.
 
 **snyk**
 ![snyk](../images/3/3.png)
@@ -166,3 +137,8 @@ Al finalizar el alumno tendrá 2 análisis de de vulnerabilidades de dependencia
 **safety**
 ![safety](../images/3/8.png)
 
+---
+
+**[⬅️ Atrás](https://netec-mx.github.io/DEVSECOPS_PYT/Capitulo2/)** | **[🗂️ Lista general](https://netec-mx.github.io/DEVSECOPS_PYT/)** | **[Siguiente ➡️](https://netec-mx.github.io/DEVSECOPS_PYT/Capitulo4/)**
+
+---
