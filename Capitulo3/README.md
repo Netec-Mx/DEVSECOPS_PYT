@@ -24,7 +24,7 @@ Al finalizar la práctica, serás capaz de:
 Este laboratorio está dividido en las siguientes secciones:
 - **[Análisis de dependencias usando SNYK](#análisis-de-dependencias-usando-snyk-return)**
 
-- **[Análisis de dependencias usando safety dependency check](#análisis-de-dependencias-usando-safety-dependency-check)**
+- **[Análisis de dependencias usando safety dependency check](#análisis-de-dependencias-usando-safety-dependency-check-return)**
 
 ## Análisis de dependencias usando SNYK [return](#instrucciones)
 
