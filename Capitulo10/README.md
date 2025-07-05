@@ -1,42 +1,28 @@
-# 10. Monitoreo de MicroservicioCliente con Grafana y Prometheus
-En este laboratorio se espera que el alumno pueda implementar una arquitectura de microservicios en docker con monitoreo incluido. 
+# Práctica 10. Monitoreo de Microservicio Cliente con Grafana y Prometheus
+## 📝 Planteamiento de la práctica:
+En este laboratorio se espera que puedas implementar una arquitectura de microservicios en Docker, incluyendo el monitoreo. 
 
-## Objetivos
-- Usar docker compose para crear arquitectura
-- Validar configuración de Prometheus
-- Crear Dashboard en Grafana 
+## 🎯 Objetivos:
+Al finalizar la práctica, serás capaz de:
+- Usar Docker Compose para crear una arquitectura.
+- Validar la configuración de Prometheus.
+- Crear dashboard en Grafana.
 
----
+## 🕒 Duración aproximada:
+- 60 minutos.
 
-<div style="width: 400px;">
-        <table width="50%">
-            <tr>
-                <td style="text-align: center;">
-                    <a href="../Capitulo9/"><img src="../images/anterior.png" width="40px"></a>
-                    <br>anterior
-                </td>
-                <td style="text-align: center;">
-                   <a href="../README.md">Lista Laboratorios</a>
-                </td>
-<td style="text-align: center;">
-                    <a href="../Capitulo11/"><img src="../images/siguiente.png" width="40px"></a>
-                    <br>siguiente
-                </td>
-            </tr>
-        </table>
-</div>
-
----
-
-
-## Diagrama
-
+## 🔍 Objetivo visual:
 ![diagrama](../images/10/diagrama.png)
 
+---
 
-## Instrucciones
+**[⬅️ Atrás](https://netec-mx.github.io/DEVSECOPS_PYT/Capitulo9/)** | **[🗂️ Lista general](https://netec-mx.github.io/DEVSECOPS_PYT/)**
 
-Este laboratorio esta separado en las siguientes secciones: 
+---
+
+## Instrucciones:
+
+Este laboratorio está dividido en las siguientes secciones:
 
 - **[Configurar Grafana y Prometheus](#configurar-grafana-y-prometheus-return)**
 
@@ -44,15 +30,15 @@ Este laboratorio esta separado en las siguientes secciones:
 
 ## Configurar Grafana y Prometheus [return](#instrucciones)
 
-1. Crearemos una carpeta que llamaremos **grafana y prometheus** en el escritorio
+Paso 1. Crea una carpeta llamada **grafana y prometheus** en el Escritorio.
 
-2. Abrimos la carpeta en **Visual Studio Code**
+Paso 2. Abre la carpeta con **Visual Studio Code**.
 
-3. Añadiremos los siguientes archivos en la carpeta:
+Paso 3. Agrega los siguientes archivos dentro de la carpeta:
 
 ![alt text](../images/10/1.png)
 
-4. En el archivo **dashboard.json** agregaremos el siguiente contenido: 
+Paso 4. En el archivo **dashboard.json**, pega el siguiente contenido: 
 
 ```json
 {
@@ -408,14 +394,14 @@ Este laboratorio esta separado en las siguientes secciones:
 }
 ```
 
-5. En el archivo **db.env** añadiremos el siguiente contenido: 
+Paso 5. En el archivo **db.env**, añade el siguiente contenido: 
 
 ```properties
 MYSQL_DATABASE=datadb
 MYSQL_ROOT_PASSWORD=1234
 ```
 
-6. En el archivo **docker-compose.yaml** añadiremos el siguiente contenido: 
+Paso 6. De igual forma, en el archivo **docker-compose.yaml**, añade el siguiente contenido: 
 
 ```yaml
 services:
@@ -483,7 +469,7 @@ networks:
           gateway: 192.168.32.1
 ```
 
-7. En el archivo **micro-client.env** añadiremos el siguiente contenido: 
+Paso 7. Por otro lado, en el archivo **micro-client.env**, añade el siguiente contenido: 
 
 ```properties
 NAME_DB=datadb
@@ -494,11 +480,9 @@ AZURE_CLIENT_ID=<client_id>
 AZURE_CLIENT_SECRET=<app_secret>
 KEYVAULT_URI=<uri_key_vault>
 ```
-> **IMPORTANTE:** Sustituye los valores por la información del **app registry de Azure**
+> ⚠️ _**IMPORTANTE:** Sustituye los valores por la información del **app registry de Azure**._
 
-
-8. En el archivo **prometheus.yaml** añade el siguiente contenido:
-
+Paso 8. Además en el archivo **prometheus.yaml**, añade el siguiente contenido:
 
 ```yaml
 global:
@@ -511,23 +495,21 @@ scrape_configs:
       - targets: ['microclient:8082']
 ```
 
-9. Ahora en **Visual Studio Code** abriremos una terminal. 
+Paso 9. Después, abre una terminal en **Visual Studio Code**. 
 
-10. Ejecutamos el siguiente comando (asegurarse de ejecutar el comando estando en la misma ruta donde se encuentra el archivo **docker-compose.yaml**):
+Paso 10. Ejecuta el siguiente comando (asegúrate de estar en la misma ruta donde se encuentra el archivo **docker-compose.yaml**):
 
 ```bash
 docker-compose up -d
 ```
 
-> **NOTA:** El comando anterior iniciará toda la infraestructura con nuestro microservicio cliente, grafana y prometheus (tarda un poco el comando). 
+> 💡 ***Nota:** Este comando iniciará toda la infraestructura, incluyendo tu microservicio cliente, Grafana y Prometheus. Puede tardar unos segundos.*
 
-
-11. Validar que el comando tenga una salida similar a la siguiente: 
-
+Paso 11. Verifica que la salida del comando sea similar a la siguiente: 
 
 ![alt text](../images/10/2.png)
 
-12. Validar que los contenedores esten iniciados con el comando:
+Paso 12. Asegúrate de que los contenedores estén en ejecución con el siguiente comando:
 
 ```bash
 docker ps
@@ -535,75 +517,67 @@ docker ps
 
 ![alt text](../images/10/3.png)
 
-> **IMPORTANTE:** Deben de ser 4 contenedores iniciados. 
-
-
-
-
+> ⚠️ _**IMPORTANTE:** Deben de ser 4 contenedores iniciados._
 
 ## Crear Dashboard en Grafana [return](#instrucciones)
 
-1. Abrir un explorador web y escribir la dirección **http://localhost:3000**
+Paso 1. Abre un navegador web y escribe la siguiente dirección **`http://localhost:3000`**.
 
 ![alt text](../images/10/4.png)
 
-2. Nos pedira un usuario y contraseña:
+Paso 2. Ingresa las credenciales cuando se te soliciten:
 
-- user: **admin**
-- password: **pass**
+- User: **admin**
+- Password: **pass**
 
-3. Estando dentro de la herramienta buscar la opción  de **Connections->Add new Connection** en el menú de grafana
+Paso 3. Una vez dentro de Grafana, busca la opción **Connections ➡️Add new Connection** en el menú lateral.
 
 ![alt text](../images/10/5.png)
 
-4. Busca **prometheus** 
+Paso 4. Busca **prometheus**.
 
 ![alt text](../images/10/6.png)
 
-5. Ahora Selecciona **Add new data source**
+Paso 5. Selecciona **Add new data source**.
 
-
-6. Crearemos el datasource con la siguiente información:
+Paso 6. Crea el data source con la siguiente información:
 
 - Name: **prometheus**
 - Prometheus server URL: **http://prometheus:9090**
-
-- Todo lo demas se deja por default
+- Deja todo lo demás con la configuración por defecto.
 
 ![alt text](../images/10/7.png)
 
-7. Almacena el datasource navegando hasta el final de las opciones de prometheus y sólo pulsa **Save & test**
-
+Paso 7. Guarda el data source desplazándote hasta el final de la página de configuración de Prometheus y haciendo clic en **Save & test**.
 
 ![alt text](../images/10/8.png)
 
-8. Ahora nos vamos al menú de grafana y seleccionaremos **Dashboards**
+Paso 8. Ve al menú lateral de Grafana y selecciona **Dashboards**.
 
 ![alt text](../images/10/9.png)
 
-9. En **Dashboards** ahora seleccionamos **New->Import**
+Paso 9. En la sección **Dashboards**, seleccion **New ➡️ Import**.
 
 ![alt text](../images/10/10.png)
 
-10. Seleccionamos **Upload dashboard JSON file** y seleccionamos el archivo dashboard.json que tenemos en nuestra carpeta **prometheus y grafana** 
-
+Paso 10. Selecciona **Upload dashboard JSON file** y elige el archivo `dashboard.json` que guardaste en la carpeta **prometheus y grafana**. 
 
 ![alt text](../images/10/11.png)
 
-11. Seleccionamos el datasource **prometheus**
+Paso 11. Seleccionamos el data source llamado **prometheus**.
 
-12. Si hemos realizado correctamente las instrucciones deberíamos de observar el siguiente dashboard:
-
-
-![alt text](../images/10/12.png)
-
-
-
-
-## Resultado Esperado
-
-si hemos llegado hasta aquí, el alumno ha implementado correctamente un dashboard de monitoreo para su microservicio cliente. 
+Paso 12. Si seguiste correctamente todos los pasos, deberías ver el siguiente dashboard:
 
 ![alt text](../images/10/12.png)
 
+## Resultado esperado:
 
+Si has llegado hasta aquí, significa que ya implementaste correctamente un dashboard de monitoreo para tu microservicio cliente.
+
+![alt text](../images/10/12.png)
+
+---
+
+**[⬅️ Atrás](https://netec-mx.github.io/DEVSECOPS_PYT/Capitulo9/)** | **[🗂️ Lista general](https://netec-mx.github.io/DEVSECOPS_PYT/)**
+
+---
